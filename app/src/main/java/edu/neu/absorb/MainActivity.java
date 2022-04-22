@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // test -- delete in the future
+        findViewById(R.id.btn_test).setOnClickListener(view -> {
+            startActivity(new Intent(this, TestActivity.class));
+        });
+
     }
     public void openMenuActivity() {
         Intent intent =  new Intent(this, MenuActivity.class);
