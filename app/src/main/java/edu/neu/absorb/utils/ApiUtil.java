@@ -14,6 +14,7 @@ public enum ApiUtil {
     LEADERBOARD_INFO_API(ApiUtil.SERVER_ADDRESS + "/focus/leaderboard", "GET");
 
 
+
     private String url;
     private String type;
 

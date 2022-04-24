@@ -12,10 +12,12 @@ public class MainActivity extends AppCompatActivity {
     // FIXME: 4/24/22 Test purpose only
     Button leaderboard;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         leaderboard = findViewById(R.id.btn_leaderboard);
         leaderboard.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +50,6 @@ public class MainActivity extends AppCompatActivity {
     public void openLeaderboard() {
         Intent intent = new Intent(this, LeaderboardActivity.class);
         startActivity(intent);
+
     }
 }

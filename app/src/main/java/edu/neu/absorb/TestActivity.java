@@ -81,7 +81,6 @@ public class TestActivity extends AppCompatActivity {
                 });
             }).start();
         });
-
         // get leaderboard info test
         findViewById(R.id.btn_test_leaderboardinfo).setOnClickListener(view -> {
             // path variables
