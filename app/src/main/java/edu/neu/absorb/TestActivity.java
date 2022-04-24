@@ -81,5 +81,26 @@ public class TestActivity extends AppCompatActivity {
                 });
             }).start();
         });
+        // get leaderboard info test
+        findViewById(R.id.btn_test_leaderboardinfo).setOnClickListener(view -> {
+            // path variables
+            Map<String, String> pathVariables = new HashMap<>();
+            pathVariables.put("total", "1");
+            // build request
+            Request request = ApiUtil.buildRequest(ApiUtil.LEADERBOARD_INFO_API, pathVariables, null);
+            // call api
+            new Thread(() -> {
+                String responseBodyStr = null;
+                try (Response response = ApiUtil.client.newCall(request).execute()) {
+                    responseBodyStr = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String finalResponseBodyStr = responseBodyStr;
+                runOnUiThread(() -> {
+                    this.tvResponse.setText(finalResponseBodyStr);
+                });
+            }).start();
+        });
     }
 }

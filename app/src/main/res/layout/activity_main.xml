@@ -34,4 +34,14 @@
         tools:layout_editor_absoluteX="154dp"
         tools:layout_editor_absoluteY="361dp" />
 
+    <Button
+        android:id="@+id/btn_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LeaderBoard"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="143dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

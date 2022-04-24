@@ -10,7 +10,10 @@ import okhttp3.RequestBody;
 
 public enum ApiUtil {
     LOGIN_API(ApiUtil.SERVER_ADDRESS + "/user/login", "POST"),
-    USER_INFO_API(ApiUtil.SERVER_ADDRESS + "/user/info", "GET");
+    USER_INFO_API(ApiUtil.SERVER_ADDRESS + "/user/info", "GET"),
+    LEADERBOARD_INFO_API(ApiUtil.SERVER_ADDRESS + "/focus/leaderboard", "GET");
+
+
 
     private String url;
     private String type;
