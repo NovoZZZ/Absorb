@@ -49,10 +49,8 @@ public class FileUtil {
                 os.writeObject(json);
 
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } finally {
 
@@ -60,7 +58,6 @@ public class FileUtil {
                     try {
                         fos.close();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -70,7 +67,6 @@ public class FileUtil {
                     try {
                         os.close();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -103,23 +99,22 @@ public class FileUtil {
                     result.add((String) ois.readObject());
 
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             } catch (StreamCorruptedException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
+
                 e.printStackTrace();
             } finally {
                 if (fis != null) {
                     try {
                         fis.close();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -128,7 +123,6 @@ public class FileUtil {
                     try {
                         ois.close();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
