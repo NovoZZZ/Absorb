@@ -25,6 +25,9 @@
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".FocusActivity"
             android:exported="false" />
         <activity
