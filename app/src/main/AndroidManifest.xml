@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Absorb"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HistoryAndProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".LeaderboardActivity"
             android:exported="false" />
         <activity
