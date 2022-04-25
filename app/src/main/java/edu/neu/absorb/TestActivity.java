@@ -2,6 +2,7 @@ package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -11,15 +12,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.FileUtil;
+import edu.neu.absorb.utils.MyApplication;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class TestActivity extends AppCompatActivity {
 
     private TextView tvResponse;
+
+    private Context context=MyApplication.getAppContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +54,20 @@ public class TestActivity extends AppCompatActivity {
                 // parse response to Object
                 JSONObject jsonObject = JSONUtil.parseObj(responseBodyStr);
                 Log.d("Test activity", jsonObject.toString());
+                //edit json
+                JSONObject object = new JSONObject(jsonObject);
+                JSONObject dataJSON = object.getJSONObject("data");
+                dataJSON.remove("username");
+                dataJSON.remove("nickname");
+                Log.d("dataJSON",dataJSON.toString());
 
+                // save json to local file
+                FileUtil.writeJson(context,dataJSON.toString(), "token",false);
+                //read json from local file
+                Log.d("read json",FileUtil.readJson(context,"token").toString());
                 // or show in ui
                 String finalResponseBodyStr = responseBodyStr;
+
                 runOnUiThread(() -> {
                     this.tvResponse.setText(finalResponseBodyStr);
                 });
