@@ -16,7 +16,6 @@ public class FileUtil {
 
 
         private static File CacheRoot;
-
         /**
          * save Json file
          *
