@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, TestActivity.class));
         });
 
+        findViewById(R.id.btn_test_focus).setOnClickListener(view -> {
+            startActivity(new Intent(this, FocusActivity.class));
+        });
+
     }
     public void openMenuActivity() {
         Intent intent =  new Intent(this, MenuActivity.class);
