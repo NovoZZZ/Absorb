@@ -3,7 +3,7 @@ package edu.neu.absorb;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginInfo {
-    @SerializedName("userID")
+    @SerializedName("userId")
     private Integer userId;
     @SerializedName("token")
     private String token;
