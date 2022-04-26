@@ -51,10 +51,12 @@ public enum ApiUtil {
             // append all path variables
             for (String key : pathVariables.keySet()) {
                 url.append(key).append("=").append(pathVariables.get(key)).append("&");
+                if (api.type.equals("POST")) url.deleteCharAt(url.length() - 1);
             }
         }
         // request builder
-        Request.Builder builder = new Request.Builder()
+        Request.Builder builder = api.type.equals("POST") ? new Request.Builder()
+                .url(url.toString()) : new Request.Builder()
                 .url(url.toString().substring(0, url.length() - 1));
         // check request type
         if (api.type.equals("POST")) {
