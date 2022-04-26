@@ -80,8 +80,8 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.btn_test_user_info).setOnClickListener(view -> {
             // path variables
             Map<String, String> pathVariables = new HashMap<>();
-            pathVariables.put("id", "1");
-            pathVariables.put("token", "b5f4564d-28d4-4510-b12c-c412a48a40ae");
+            pathVariables.put("id", "9");
+            pathVariables.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
             // build request
             Request request = ApiUtil.buildRequest(ApiUtil.USER_INFO_API, pathVariables, null);
             // call api
@@ -102,9 +102,10 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.btn_test_leaderboardinfo).setOnClickListener(view -> {
             // path variables
             Map<String, String> pathVariables = new HashMap<>();
-            pathVariables.put("total", "1");
+            pathVariables.put("user_id", "9 ");
+            pathVariables.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
             // build request
-            Request request = ApiUtil.buildRequest(ApiUtil.LEADERBOARD_INFO_API, pathVariables, null);
+            Request request = ApiUtil.buildRequest(ApiUtil.GET_HISTORY_LIST_API, pathVariables, null);
             // call api
             new Thread(() -> {
                 String responseBodyStr = null;
