@@ -2,6 +2,7 @@ package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.Map;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.TimeUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -55,7 +57,8 @@ public class FocusActivity extends AppCompatActivity {
             endTime = new Date();
             // upload focus record to server
             uploadRecordToServer();
-            // TODO: redirect to result page
+            // redirect to result page
+            redirectToResultPage();
         });
 
         // start counting time
@@ -74,7 +77,7 @@ public class FocusActivity extends AppCompatActivity {
                 // update seconds
                 seconds += 1;
                 // convert seconds to time
-                String time = convertSecondsToTime();
+                String time = TimeUtil.convertSecondsToTime(seconds);
                 // update ui
                 runOnUiThread(() -> tvFocusTime.setText(time));
                 // sleep 1 second
@@ -88,41 +91,15 @@ public class FocusActivity extends AppCompatActivity {
     }
 
     /**
-     * convert counted seconds to time format, which is mm:ss
-     *
-     * @return converted time string
-     */
-    private String convertSecondsToTime() {
-        StringBuilder result = new StringBuilder();
-        if (seconds < 10) {
-            result.append("00:0").append(seconds);
-        } else if (seconds < 60) {
-            result.append("00:").append(seconds);
-        } else {
-            int hours = seconds / 60;
-            if (hours < 10) {
-                result.append("0");
-            }
-            result.append(hours).append(":");
-            int newSeconds = seconds % 60;
-            if (newSeconds < 10) {
-                result.append("0");
-            }
-            result.append(newSeconds);
-        }
-        return result.toString();
-    }
-
-    /**
      * upload focus record to server
      */
     private void uploadRecordToServer() {
         // request body
         Map<String, Object> requestBody = new HashMap<>();
         // TODO: user id
-        requestBody.put("userId", 1);
+        requestBody.put("userId", 9);
         // TODO: token
-        requestBody.put("token", "45452b03-fbbd-4248-a8d7-772d37a9173f");
+        requestBody.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
         // description
         requestBody.put("description", etFocusDescription.getText().toString());
         // startTime
@@ -146,5 +123,20 @@ public class FocusActivity extends AppCompatActivity {
             Log.d("Focus activity", jsonObject.toString());
 
         }).start();
+    }
+
+    private void redirectToResultPage() {
+        // create intent
+        Intent intent = new Intent(this, FocusResultActivity.class);
+        // put info
+        // startTime
+        intent.putExtra("startTime", startTime);
+        // endTime
+        intent.putExtra("endTime", endTime);
+        // duration
+        intent.putExtra("duration", seconds);
+        startActivity(intent);
+        // finish this activity
+        finish();
     }
 }
