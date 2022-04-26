@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.651"
+        app:layout_constraintVertical_bias="0.723"
         app:srcCompat="@drawable/comic_trees" />
 
     <TextView
@@ -23,10 +23,33 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="6:29:25 PM  --  6:29:25 PM"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_focus_result_duration"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_focus_result_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Apr 30, 2022"
+        app:layout_constraintBottom_toTopOf="@+id/tv_focus_result_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_focus_result_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="10H:21M:23S"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_focus_result_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -42,18 +65,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/tv_focus_result_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="10H:21M:23S"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/tv_focus_result_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,25 +77,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_focus_result_time_label"
+        android:id="@+id/tv_focus_result_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Time"
-        android:textColor="#807E7E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_focus_result_date"
+        android:layout_marginBottom="11dp"
+        android:text="description"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_focus_result_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Apr 30, 2022"
-        app:layout_constraintBottom_toTopOf="@+id/tv_focus_result_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

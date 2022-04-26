@@ -4,18 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#51A387"
     tools:context=".FocusActivity">
-
-    <TextView
-        android:id="@+id/tv_task_time_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Time:"
-        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_tree_pic"
@@ -25,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533"
+        app:layout_constraintVertical_bias="0.361"
         app:srcCompat="@drawable/comic_trees" />
 
     <EditText
@@ -33,10 +23,12 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/white"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tv_focus_time"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
         app:layout_constraintStart_toEndOf="@+id/tv_task_label"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -44,9 +36,12 @@
         android:id="@+id/tv_task_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="38dp"
         android:text="Task:"
-        app:layout_constraintBottom_toTopOf="@+id/tv_task_time_label"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent" />
@@ -55,21 +50,25 @@
         android:id="@+id/tv_focus_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
         android:text="00:00"
-        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
-        app:layout_constraintStart_toEndOf="@+id/tv_task_time_label" />
+        android:textColor="@color/white"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_tree_pic" />
 
     <Button
         android:id="@+id/btn_finish_focus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/green_light"
         android:text="finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_tree_pic" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_focus_time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

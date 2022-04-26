@@ -135,6 +135,8 @@ public class FocusActivity extends AppCompatActivity {
         intent.putExtra("endTime", endTime);
         // duration
         intent.putExtra("duration", seconds);
+        // description
+        intent.putExtra("description", etFocusDescription.getText().toString());
         startActivity(intent);
         // finish this activity
         finish();
