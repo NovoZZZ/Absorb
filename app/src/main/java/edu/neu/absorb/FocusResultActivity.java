@@ -18,6 +18,7 @@ public class FocusResultActivity extends AppCompatActivity {
 
     private TextView tvResultTime;
     private TextView tvResultDuration;
+    private TextView tvResultDate;
     private Button btnComplete;
 
     @Override
@@ -27,6 +28,7 @@ public class FocusResultActivity extends AppCompatActivity {
 
         tvResultTime = findViewById(R.id.tv_focus_result_time);
         tvResultDuration = findViewById(R.id.tv_focus_result_duration);
+        tvResultDate = findViewById(R.id.tv_focus_result_date);
 
         btnComplete = findViewById(R.id.btn_focus_result_complete);
         btnComplete.setOnClickListener(view -> {
@@ -52,9 +54,14 @@ public class FocusResultActivity extends AppCompatActivity {
         int duration = (int) extras.get("duration");
 
         // update ui
+        // date format
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        String dateResult = dateFormat.format(startTime);
+        tvResultDate.setText(dateResult);
+
         // time format
-        DateFormat dateInstance = SimpleDateFormat.getDateTimeInstance();
-        String resultTime = dateInstance.format(startTime) + " -- " + dateInstance.format(endTime);
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
+        String resultTime = timeFormat.format(startTime) + " -- " + timeFormat.format(endTime);
         // update result time
         tvResultTime.setText(resultTime);
 
