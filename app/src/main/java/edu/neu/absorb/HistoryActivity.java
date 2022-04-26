@@ -28,7 +28,7 @@ import okhttp3.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private List<FocusHistoryDetail> focusHistoryDetailList;
+    public static List<FocusHistoryDetail> focusHistoryDetailList;
     private RecyclerView recyclerView;
 
     @Override
@@ -53,12 +53,12 @@ public class HistoryActivity extends AppCompatActivity {
         Gson gson = new Gson();
         LoginInfo loginInfo = gson.fromJson(strRes, LoginInfo.class);
 
-        // FIXME: 4/25/22 
-       // Integer userId = loginInfo.getUserId();
-      //  String token = loginInfo.getToken();
+        // FIXME: 4/25/22
+        Integer userId = loginInfo.getUserId();
+        String token = loginInfo.getToken();
 
-        Integer userId = 9;
-        String token = "0788ad5e-c5b0-4a43-a744-547353d763b4";
+        // Integer userId = 9;
+       // String token = "0788ad5e-c5b0-4a43-a744-547353d763b4";
 
         // Get histiory list request
         Map<String, String> pathVariables = new HashMap<>();
@@ -75,10 +75,7 @@ public class HistoryActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             String finalResponseBodyStr = responseBodyStr;
-
             FocusHistory focusHistory = gson.fromJson(finalResponseBodyStr, FocusHistory.class);
-    //        focusHistoryDetailList.add(new FocusHistoryDetail(1,1,finalResponseBodyStr,null,null,null
-         //   ,null));
             for (FocusHistoryDetail detail : focusHistory.getFocusHistoryDetailList()) focusHistoryDetailList.add(detail);
                 runOnUiThread(() -> {
                 HistoryRecyclerAdapter adapter = new HistoryRecyclerAdapter(focusHistoryDetailList);
