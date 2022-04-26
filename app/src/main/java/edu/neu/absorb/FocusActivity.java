@@ -2,6 +2,7 @@ package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +12,13 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.TimeUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -47,12 +53,16 @@ public class FocusActivity extends AppCompatActivity {
         btnFinish.setOnClickListener(view -> {
             // mark focus task finished
             isFinished = true;
-            // TODO: call add focus api
-            // TODO: redirect to result page
+            // init end time
+            endTime = new Date();
+            // upload focus record to server
+            uploadRecordToServer();
+            // redirect to result page
+            redirectToResultPage();
         });
 
+        // start counting time
         startCounting();
-
     }
 
     /**
@@ -67,7 +77,7 @@ public class FocusActivity extends AppCompatActivity {
                 // update seconds
                 seconds += 1;
                 // convert seconds to time
-                String time = convertSecondsToTime();
+                String time = TimeUtil.convertSecondsToTime(seconds);
                 // update ui
                 runOnUiThread(() -> tvFocusTime.setText(time));
                 // sleep 1 second
@@ -80,24 +90,53 @@ public class FocusActivity extends AppCompatActivity {
         }).start();
     }
 
-    private String convertSecondsToTime() {
-        StringBuilder result = new StringBuilder();
-        if (seconds < 10) {
-            result.append("00:0").append(seconds);
-        } else if (seconds < 60) {
-            result.append("00:").append(seconds);
-        } else {
-            int hours = seconds / 60;
-            if (hours < 10) {
-                result.append("0");
+    /**
+     * upload focus record to server
+     */
+    private void uploadRecordToServer() {
+        // request body
+        Map<String, Object> requestBody = new HashMap<>();
+        // TODO: user id
+        requestBody.put("userId", 9);
+        // TODO: token
+        requestBody.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
+        // description
+        requestBody.put("description", etFocusDescription.getText().toString());
+        // startTime
+        requestBody.put("startTime", startTime.getTime());
+        // endTime
+        requestBody.put("endTime", endTime.getTime());
+        // build request
+        Request request = ApiUtil.buildRequest(ApiUtil.ADD_FOCUS_RECORD_API, null, requestBody);
+
+        // call api
+        new Thread(() -> {
+            String responseBodyStr = null;
+            try (Response response = ApiUtil.client.newCall(request).execute()) {
+                responseBodyStr = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            result.append(hours).append(":");
-            int newSeconds = seconds % 60;
-            if (newSeconds < 10) {
-                result.append("0");
-            }
-            result.append(newSeconds);
-        }
-        return result.toString();
+
+            // parse response to Object
+            JSONObject jsonObject = JSONUtil.parseObj(responseBodyStr);
+            Log.d("Focus activity", jsonObject.toString());
+
+        }).start();
+    }
+
+    private void redirectToResultPage() {
+        // create intent
+        Intent intent = new Intent(this, FocusResultActivity.class);
+        // put info
+        // startTime
+        intent.putExtra("startTime", startTime);
+        // endTime
+        intent.putExtra("endTime", endTime);
+        // duration
+        intent.putExtra("duration", seconds);
+        startActivity(intent);
+        // finish this activity
+        finish();
     }
 }

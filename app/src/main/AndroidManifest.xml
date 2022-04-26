@@ -18,6 +18,9 @@
             android:name=".HistoryAndProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".FocusResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".LeaderboardActivity"
             android:exported="false" />
         <activity
