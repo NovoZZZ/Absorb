@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.FileUtil;
+import edu.neu.absorb.utils.MyApplication;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Call;

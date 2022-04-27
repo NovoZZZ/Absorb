@@ -57,7 +57,7 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
         int rank = position + 1;
 
         holder.userAvator.setImageResource(R.drawable.comic_trees);
-        holder.userName.setText(name);
+        holder.userName.setText("Name: " + name);
         holder.userScore.setText("Score: " + String.valueOf(score));
         holder.userRank.setText("Rank: " + String.valueOf(rank));
     }

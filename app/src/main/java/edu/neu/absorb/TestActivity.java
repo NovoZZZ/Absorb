@@ -2,6 +2,7 @@ package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -11,15 +12,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.FileUtil;
+import edu.neu.absorb.utils.MyApplication;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class TestActivity extends AppCompatActivity {
 
     private TextView tvResponse;
+
+    private Context context=MyApplication.getAppContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +54,20 @@ public class TestActivity extends AppCompatActivity {
                 // parse response to Object
                 JSONObject jsonObject = JSONUtil.parseObj(responseBodyStr);
                 Log.d("Test activity", jsonObject.toString());
+                //edit json
+                JSONObject object = new JSONObject(jsonObject);
+                JSONObject dataJSON = object.getJSONObject("data");
+                dataJSON.remove("username");
+                dataJSON.remove("nickname");
+                Log.d("dataJSON",dataJSON.toString());
 
+                // save json to local file
+                FileUtil.writeJson(context,dataJSON.toString(), "token",false);
+                //read json from local file
+                Log.d("read json",FileUtil.readJson(context,"token").toString());
                 // or show in ui
                 String finalResponseBodyStr = responseBodyStr;
+
                 runOnUiThread(() -> {
                     this.tvResponse.setText(finalResponseBodyStr);
                 });
@@ -63,8 +80,8 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.btn_test_user_info).setOnClickListener(view -> {
             // path variables
             Map<String, String> pathVariables = new HashMap<>();
-            pathVariables.put("id", "1");
-            pathVariables.put("token", "b5f4564d-28d4-4510-b12c-c412a48a40ae");
+            pathVariables.put("id", "9");
+            pathVariables.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
             // build request
             Request request = ApiUtil.buildRequest(ApiUtil.USER_INFO_API, pathVariables, null);
             // call api
@@ -85,9 +102,10 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.btn_test_leaderboardinfo).setOnClickListener(view -> {
             // path variables
             Map<String, String> pathVariables = new HashMap<>();
-            pathVariables.put("total", "1");
+            pathVariables.put("user_id", "9 ");
+            pathVariables.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
             // build request
-            Request request = ApiUtil.buildRequest(ApiUtil.LEADERBOARD_INFO_API, pathVariables, null);
+            Request request = ApiUtil.buildRequest(ApiUtil.GET_HISTORY_LIST_API, pathVariables, null);
             // call api
             new Thread(() -> {
                 String responseBodyStr = null;
