@@ -4,7 +4,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,9 @@ public class MenuActivity extends AppCompatActivity {
 
     //UI Views
     private ViewPager viewPager;
+
+    // History/ profile page
+    private Button historyPage;
 
     private ArrayList<MenuModel> modelArrayList;
     private MenuAdapter myAdapter;
@@ -30,6 +36,15 @@ public class MenuActivity extends AppCompatActivity {
         //init UI views
         viewPager = findViewById(R.id.viewPager);
         loadCards();
+
+        // init history page
+        historyPage = findViewById(R.id.btn_history);
+        historyPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHistoryPage();
+            }
+        });
 
         //set view pager change listener
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -50,6 +65,11 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void openHistoryPage() {
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
     }
 
     private void loadCards() {
