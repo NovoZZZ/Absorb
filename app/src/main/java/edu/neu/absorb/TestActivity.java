@@ -69,6 +69,7 @@ public class TestActivity extends AppCompatActivity {
                 String finalResponseBodyStr = responseBodyStr;
 
                 runOnUiThread(() -> {
+
                     this.tvResponse.setText(finalResponseBodyStr);
                 });
 
