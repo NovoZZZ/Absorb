@@ -14,7 +14,7 @@ public enum ApiUtil {
     LEADERBOARD_INFO_API(ApiUtil.SERVER_ADDRESS + "/focus/leaderboard", "GET"),
     ADD_FOCUS_RECORD_API(ApiUtil.SERVER_ADDRESS + "/focus/add", "POST"),
     GET_HISTORY_LIST_API(ApiUtil.SERVER_ADDRESS + "/focus/list", "GET"),
-    REGISTER_API(ApiUtil.SERVER_ADDRESS + "/user/signup", "POST");
+    REGISTER_API(ApiUtil.SERVER_ADDRESS + "/user/create", "POST");
 
 
     private String url;
