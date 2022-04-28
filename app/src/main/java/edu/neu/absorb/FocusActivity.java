@@ -1,11 +1,17 @@
 package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,15 +25,15 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
 import edu.neu.absorb.utils.TimeUtil;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class FocusActivity extends AppCompatActivity {
+public class FocusActivity extends AppCompatActivity implements SensorEventListener {
 
     private TextView tvFocusTime;
     private EditText etFocusDescription;
     private Button btnFinish;
+    private TextView tvGrowSpeed;
 
     // start time of this focus task
     private Date startTime;
@@ -40,6 +46,11 @@ public class FocusActivity extends AppCompatActivity {
     // mark the focus task is finished or not. it's false by default
     private boolean isFinished;
 
+    // sensor manager
+    private SensorManager sensorManager;
+    // light sensor
+    private Sensor lightSensor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +59,8 @@ public class FocusActivity extends AppCompatActivity {
         tvFocusTime = findViewById(R.id.tv_focus_time);
         etFocusDescription = findViewById(R.id.et_focus_description);
         btnFinish = findViewById(R.id.btn_finish_focus);
+
+        tvGrowSpeed = findViewById(R.id.tv_grow_speed);
 
         // click listener of finish button
         btnFinish.setOnClickListener(view -> {
@@ -63,6 +76,9 @@ public class FocusActivity extends AppCompatActivity {
 
         // start counting time
         startCounting();
+
+        // init light sensor
+        initLightSensor();
     }
 
     /**
@@ -135,8 +151,40 @@ public class FocusActivity extends AppCompatActivity {
         intent.putExtra("endTime", endTime);
         // duration
         intent.putExtra("duration", seconds);
+        // description
+        intent.putExtra("description", etFocusDescription.getText().toString());
         startActivity(intent);
         // finish this activity
         finish();
+    }
+
+    /**
+     * init light sensor
+     */
+    private void initLightSensor() {
+        // get light sensor
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        // register sensor event
+        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sensorEvent.values[0] < 2) {
+            tvGrowSpeed.setText("Fast");
+            tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.green_light));
+        } else if (sensorEvent.values[0] > 10) {
+            tvGrowSpeed.setText("Slow");
+            tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.red));
+        } else {
+            tvGrowSpeed.setText("Normal");
+            tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.white));
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+//        Toast.makeText(FocusActivity.this, "accuracy changed!", Toast.LENGTH_SHORT).show();
     }
 }
