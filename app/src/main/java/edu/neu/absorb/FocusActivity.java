@@ -54,7 +54,12 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
     // light sensor
     private Sensor lightSensor;
 
+    // learning rate
+    private double rateTotal;
+    private int count;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_focus);
@@ -70,9 +75,11 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
 
         // read description from menu
         Bundle extras = getIntent().getExtras();
-        String descriptionFromMenu = (String) extras.get(MenuActivity.EXTRA_DESCRIPTION);
-        if (descriptionFromMenu != null) {
-            etFocusDescription.setText(descriptionFromMenu);
+        if (extras != null) {
+            String descriptionFromMenu = (String) extras.get(MenuActivity.EXTRA_DESCRIPTION);
+            if (descriptionFromMenu != null) {
+                etFocusDescription.setText(descriptionFromMenu);
+            }
         }
 
         // click listener of finish button
@@ -140,6 +147,8 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         requestBody.put("startTime", startTime.getTime());
         // endTime
         requestBody.put("endTime", endTime.getTime());
+        // rate
+        requestBody.put("rate", rateTotal / count);
         // build request
         Request request = ApiUtil.buildRequest(ApiUtil.ADD_FOCUS_RECORD_API, null, requestBody);
 
@@ -171,6 +180,8 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         intent.putExtra("duration", seconds);
         // description
         intent.putExtra("description", etFocusDescription.getText().toString());
+        // growing rate
+        intent.putExtra("rate", rateTotal / count);
         startActivity(intent);
         // finish this activity
         finish();
@@ -184,7 +195,7 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         // register sensor event
-        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -196,15 +207,19 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.green_light));
             // change tree pic
             ivTreePic.setImageResource(R.drawable.bubbletree_nobg);
+            rateTotal += 2;
         } else if (sensorEvent.values[0] > 10) {
             tvGrowSpeed.setText("Slow");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.red));
             ivTreePic.setImageResource(R.drawable.leave_nobg);
+            rateTotal += 1;
         } else {
             tvGrowSpeed.setText("Normal");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.white));
             ivTreePic.setImageResource(R.drawable.pinetree_nobg);
+            rateTotal += 0.5;
         }
+        count++;
     }
 
     @Override

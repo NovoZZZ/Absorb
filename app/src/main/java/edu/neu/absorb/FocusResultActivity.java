@@ -1,10 +1,12 @@
 package edu.neu.absorb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -20,6 +22,8 @@ public class FocusResultActivity extends AppCompatActivity {
     private TextView tvResultDuration;
     private TextView tvResultDate;
     private TextView tvResultDescription;
+    private TextView tvResultRate;
+    private ImageView ivResultTreePic;
     private Button btnComplete;
 
     @Override
@@ -31,6 +35,8 @@ public class FocusResultActivity extends AppCompatActivity {
         tvResultDuration = findViewById(R.id.tv_focus_result_duration);
         tvResultDate = findViewById(R.id.tv_focus_result_date);
         tvResultDescription = findViewById(R.id.tv_focus_result_description);
+        tvResultRate = findViewById(R.id.tv_focus_result_rate);
+        ivResultTreePic = findViewById(R.id.iv_focus_result_tree_pic);
 
         btnComplete = findViewById(R.id.btn_focus_result_complete);
         btnComplete.setOnClickListener(view -> {
@@ -56,7 +62,8 @@ public class FocusResultActivity extends AppCompatActivity {
         int duration = (int) extras.get("duration");
         // description
         String description = (String) extras.get("description");
-
+        // rate
+        double rate = (double) extras.get("rate");
         // update ui
         // date format
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
@@ -78,5 +85,23 @@ public class FocusResultActivity extends AppCompatActivity {
             description = "Regular focus task";
         }
         tvResultDescription.setText(description);
+
+        // rate
+        if (rate > 1.5) {
+            // show speed
+            tvResultRate.setText("Fast");
+            // change speed color
+            tvResultRate.setTextColor(ContextCompat.getColor(this, R.color.green_light));
+            // change tree pic
+            ivResultTreePic.setImageResource(R.drawable.bubbletree_nobg);
+        } else if (rate < 1) {
+            tvResultRate.setText("Slow");
+            tvResultRate.setTextColor(ContextCompat.getColor(this, R.color.red));
+            ivResultTreePic.setImageResource(R.drawable.leave_nobg);
+        } else {
+            tvResultRate.setText("Normal");
+            tvResultRate.setTextColor(ContextCompat.getColor(this, R.color.white));
+            ivResultTreePic.setImageResource(R.drawable.pinetree_nobg);
+        }
     }
 }
