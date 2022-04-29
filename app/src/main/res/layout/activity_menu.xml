@@ -46,23 +46,24 @@
         android:layout_height="wrap_content"
         android:text="profile"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.40"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01"
-        app:layout_constraintHorizontal_bias="0.60"/>
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
-        android:id="@+id/btn_history"
+        android:id="@+id/btn_leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="history"
+        android:text="leaderboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01"
-        app:layout_constraintHorizontal_bias="0.95"/>
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
         android:id="@+id/btn_startFocus"
@@ -77,7 +78,7 @@
 
     <EditText
         android:id="@+id/ed_description"
-        android:layout_width="300dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -97,7 +98,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="#673AB7"
+        android:background="#6FD6B3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85">
