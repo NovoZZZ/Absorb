@@ -41,6 +41,8 @@ public class MenuActivity extends AppCompatActivity {
     //set userid to textview
     private TextView tv_nickname;
 
+    private EditText etFocusTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,8 @@ public class MenuActivity extends AppCompatActivity {
         //init UI views
         viewPager = findViewById(R.id.viewPager);
         loadCards();
+
+        etFocusTask = findViewById(R.id.ed_description);
 
         //set nickname to et
         TextView tv_nickname = findViewById(R.id.tv_nickname);
@@ -65,7 +69,7 @@ public class MenuActivity extends AppCompatActivity {
                 openLeaderBoardPage();
             }
         });
-        
+
         // open focus page
         btn_startFocus = findViewById(R.id.btn_startFocus);
         btn_startFocus.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +101,10 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void openFocusPage() {
-        EditText focusTask = (EditText) findViewById(R.id.et_focus_description);
-        String focusDescription = focusTask.getText().toString();
+        String focusDescription = etFocusTask.getText().toString();
 
-        Intent intent = new Intent(this,FocusActivity.class);
-        intent.putExtra(EXTRA_DESCRIPTION,focusDescription);
+        Intent intent = new Intent(this, FocusActivity.class);
+        intent.putExtra(EXTRA_DESCRIPTION, focusDescription);
         startActivity(intent);
     }
 
@@ -146,7 +149,7 @@ public class MenuActivity extends AppCompatActivity {
         //set adapter to viewpager
         viewPager.setAdapter(myAdapter);
         //set default padding from left/right
-        viewPager.setPadding(100,0,100,0);
+        viewPager.setPadding(100, 0, 100, 0);
 
 
     }

@@ -59,11 +59,6 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_focus);
 
-        //todo: put description from menu page to etFocusDescription
-        // but cannot settext to and putExtras from etFocusDescription at same time in onCreate 4/28
-        Intent intent = getIntent();
-        String descriptionFromMenu = intent.getStringExtra(MenuActivity.EXTRA_DESCRIPTION);
-
 
         tvFocusTime = findViewById(R.id.tv_focus_time);
         etFocusDescription = findViewById(R.id.et_focus_description);
@@ -72,6 +67,13 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         tvGrowSpeed = findViewById(R.id.tv_grow_speed);
 
         ivTreePic = findViewById(R.id.iv_tree_pic);
+
+        // read description from menu
+        Bundle extras = getIntent().getExtras();
+        String descriptionFromMenu = (String) extras.get(MenuActivity.EXTRA_DESCRIPTION);
+        if (descriptionFromMenu != null) {
+            etFocusDescription.setText(descriptionFromMenu);
+        }
 
         // click listener of finish button
         btnFinish.setOnClickListener(view -> {
