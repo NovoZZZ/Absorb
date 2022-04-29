@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/iv_focus_result_tree_pic"
-        android:layout_width="259dp"
-        android:layout_height="242dp"
+        android:layout_width="258dp"
+        android:layout_height="245dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
