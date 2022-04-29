@@ -24,6 +24,7 @@ import java.util.Map;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
+import edu.neu.absorb.utils.FileUtil;
 import edu.neu.absorb.utils.TimeUtil;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -110,12 +111,17 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
      * upload focus record to server
      */
     private void uploadRecordToServer() {
+        // get login info
+        LoginInfo loginInfo = FileUtil.getLoginInfo();
+        if (loginInfo == null) {
+            throw new RuntimeException("NO USER LOGIN");
+        }
         // request body
         Map<String, Object> requestBody = new HashMap<>();
-        // TODO: user id
-        requestBody.put("userId", 9);
-        // TODO: token
-        requestBody.put("token", "0788ad5e-c5b0-4a43-a744-547353d763b4");
+        // user id
+        requestBody.put("userId", loginInfo.getUserId());
+        // token
+        requestBody.put("token", loginInfo.getToken());
         // description
         requestBody.put("description", etFocusDescription.getText().toString());
         // startTime
