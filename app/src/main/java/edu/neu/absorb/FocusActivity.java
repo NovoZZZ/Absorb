@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
     private EditText etFocusDescription;
     private Button btnFinish;
     private TextView tvGrowSpeed;
+    private ImageView ivTreePic;
 
     // start time of this focus task
     private Date startTime;
@@ -62,6 +64,8 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
         btnFinish = findViewById(R.id.btn_finish_focus);
 
         tvGrowSpeed = findViewById(R.id.tv_grow_speed);
+
+        ivTreePic = findViewById(R.id.iv_tree_pic);
 
         // click listener of finish button
         btnFinish.setOnClickListener(view -> {
@@ -178,14 +182,20 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.values[0] < 2) {
+            // show speed
             tvGrowSpeed.setText("Fast");
+            // change speed color
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.green_light));
+            // change tree pic
+            ivTreePic.setImageResource(R.drawable.bubbletree_nobg);
         } else if (sensorEvent.values[0] > 10) {
             tvGrowSpeed.setText("Slow");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.red));
+            ivTreePic.setImageResource(R.drawable.leave_nobg);
         } else {
             tvGrowSpeed.setText("Normal");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.white));
+            ivTreePic.setImageResource(R.drawable.pinetree_nobg);
         }
     }
 
