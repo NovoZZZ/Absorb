@@ -212,12 +212,12 @@ public class FocusActivity extends AppCompatActivity implements SensorEventListe
             tvGrowSpeed.setText("Slow");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.red));
             ivTreePic.setImageResource(R.drawable.leave_nobg);
-            rateTotal += 1;
+            rateTotal += 0.5;
         } else {
             tvGrowSpeed.setText("Normal");
             tvGrowSpeed.setTextColor(ContextCompat.getColor(this, R.color.white));
             ivTreePic.setImageResource(R.drawable.pinetree_nobg);
-            rateTotal += 0.5;
+            rateTotal += 1;
         }
         count++;
     }
