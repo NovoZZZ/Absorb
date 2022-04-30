@@ -30,7 +30,7 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     EditText et_loginuser,et_loginpass;
     Button btnlogin,btnsignup;
-    TextView errview,changepassword;
+    TextView errview;
 
     private Context context= MyApplication.getAppContext();
     @Override
@@ -53,14 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
         et_loginuser=findViewById(R.id.et_loginusername);
         et_loginpass=findViewById(R.id.et_loginpassword);
-        changepassword=findViewById(R.id.tv_changepassword);
-        changepassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ChangePasswordActivity.class);
-                startActivity(intent);
-            }
-        });
         btnlogin=findViewById(R.id.btn_login);
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override

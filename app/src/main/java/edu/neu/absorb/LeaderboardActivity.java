@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,17 +33,23 @@ import retrofit2.Callback;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
+    // Used to fulfill leaderboard recycler adapter
     private List<User> userList;
+    // Leaderboard page recycler view
     private RecyclerView recyclerView;
+
+    // Leaderboard page divider
+    private View horiDivider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
-
         userList = new ArrayList<>();
         recyclerView = findViewById(R.id.leaderboard_link_collector);
+        horiDivider = findViewById(R.id.leaderboard_page_divider);
+        horiDivider.setBackgroundColor(Color.BLUE);
         getLeaderboardInfo();
-       // setAdapter();
     }
 
     private void setAdapter() {
@@ -52,30 +60,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-/**
-    private void getLeaderboardInfo() {
-        LeaderboardInfoInterface leaderboardInfoInterface =
-                LeaderboardInfoBuilder.getRetrofitInstance().create(LeaderboardInfoInterface.class);
-        Call<JsonObject> call = leaderboardInfoInterface.getLeaderboardInfo();
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("response", String.valueOf(response.body()));
-                JsonObject res = response.body();
-                JsonObject data = res.getAsJsonObject("data");
-                // FIXME: 4/24/22
-                userList.add(new User(String.valueOf(data), 1, 1));
-
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-            }
-        });
-    }
-**/
-
-
+    /**
+     * Get leaderboard info. and set up the recycler view
+     */
     private void getLeaderboardInfo() {
             // path variables
             Map<String, String> pathVariables = new HashMap<>();
@@ -96,10 +83,6 @@ public class LeaderboardActivity extends AppCompatActivity {
                 User[] users = user.getUserList().toArray(new User[0]);
                 for (User a : users) userList.add(a);
 
-              //  while (!finalResponseBodyStr.substring(index, index + 4).equals("data")) index++;
-              //  for (int i = index; i < finalResponseBodyStr.length(); i++) {
-              //      userList.add(new User(finalResponseBodyStr.substring(i, i + 1), 1, 1));
-              //  }
                 runOnUiThread(() -> {
                     LeaderboardRecyclerAdapter adapter = new LeaderboardRecyclerAdapter(userList);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
