@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/history_horizontal_divider"
         android:layout_width="match_parent"
         android:layout_height="151dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -102,10 +102,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_profile_history"
-        android:layout_width="411dp"
-        android:layout_height="451dp"
+        android:layout_width="420dp"
+        android:layout_height="391dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_horizontal_divider"
+        app:layout_constraintVertical_bias="0.407" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
