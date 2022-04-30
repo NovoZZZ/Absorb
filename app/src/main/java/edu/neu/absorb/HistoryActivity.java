@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -19,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
 import edu.neu.absorb.utils.FileUtil;
 import edu.neu.absorb.utils.MyApplication;
@@ -45,12 +41,12 @@ public class HistoryActivity extends AppCompatActivity {
 
         // Initialize history recycler view
         focusHistoryDetailList = new ArrayList<>();
-        recyclerView = findViewById(R.id.history_recycler_view);
+        recyclerView = findViewById(R.id.rv_profile_history);
 
-        profile_pic = findViewById(R.id.profile_image);
+        profile_pic = findViewById(R.id.iv_profile_avatar);
         profile_pic.setImageResource(R.drawable.flowers);
 
-        userName = findViewById(R.id.profile_username);
+        userName = findViewById(R.id.tv_profile_nickname);
         userName.setText("User 1");
 
         // Set focus history adapter
