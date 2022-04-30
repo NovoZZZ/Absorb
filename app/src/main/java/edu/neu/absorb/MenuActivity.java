@@ -30,8 +30,12 @@ public class MenuActivity extends AppCompatActivity {
     //UI Views
     private ViewPager viewPager;
 
-    // profile/ leaderboard page
+    // leaderboard page
     private Button btn_leaderBoard;
+
+    // profile page
+    private Button btn_profile;
+
     // focus page
     private Button btn_startFocus;
 
@@ -79,6 +83,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        btn_profile = findViewById(R.id.btn_profile);
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+            }
+        });
         //set view pager change listener
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -108,6 +119,9 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openProfile() {
+        startActivity(new Intent(this, HistoryActivity.class));
+    }
     private void setNickName() {
 
         //Todo: how to get username? 4/28

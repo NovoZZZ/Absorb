@@ -1,5 +1,6 @@
 package edu.neu.absorb;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,8 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
         private TextView userName;
         private TextView userScore;
         private TextView userRank;
-        private ImageView userAvator;
+        private ImageView medal;
+        private de.hdodenhof.circleimageview.CircleImageView userAvator;
 
         public MyViewHolder(final View view) {
             super(view);
@@ -34,6 +36,7 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
             userScore = view.findViewById(R.id.leaderboard_userscore);
             userRank = view.findViewById(R.id.leaderboard_userrank);
             userAvator = view.findViewById(R.id.leaderboard_useravator);
+            medal = view.findViewById(R.id.leaderboard_medal_pic);
         }
     }
 
@@ -51,15 +54,22 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
     @Override
     public void onBindViewHolder(@NonNull LeaderboardRecyclerAdapter.MyViewHolder holder, int position) {
         // Sort user's total online hour in descending order
-        Collections.sort(userList, (a, b) -> (int)(b.getTotalHour() * 100) - (int)(a.getTotalHour() * 100));
+        Collections.sort(userList, (a, b) -> b.getScore() - a.getScore());
         String name = userList.get(position).getUserName();
-        int score = (int)Math.floor(userList.get(position).getTotalHour() * 60);
+        int score = userList.get(position).getScore();
         int rank = position + 1;
 
-        holder.userAvator.setImageResource(R.drawable.comic_trees);
-        holder.userName.setText("Name: " + name);
+        holder.userAvator.setImageResource(R.drawable.flowers);
+        holder.userName.setText( name);
+        holder.userName.setTextColor(Color.BLACK);
         holder.userScore.setText("Score: " + String.valueOf(score));
+        holder.userScore.setTextColor(Color.BLUE);
         holder.userRank.setText("Rank: " + String.valueOf(rank));
+        if (position == 0) holder.medal.setImageResource(R.drawable.gold_medal);
+        else if (position == 1) holder.medal.setImageResource(R.drawable.silever_medal);
+        else if (position == 2) holder.medal.setImageResource(R.drawable.bronze_medal);
+        else holder.medal.setImageResource(R.drawable.white);
+
     }
 
     @Override

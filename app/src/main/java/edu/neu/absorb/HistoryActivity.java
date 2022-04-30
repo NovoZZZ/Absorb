@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -28,8 +29,14 @@ import okhttp3.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
+    // Used to fulfill history recycler addapter
     public static List<FocusHistoryDetail> focusHistoryDetailList;
+    // Focus history page recycler view
     private RecyclerView recyclerView;
+
+    private TextView userName;
+
+    private de.hdodenhof.circleimageview.CircleImageView profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +47,20 @@ public class HistoryActivity extends AppCompatActivity {
         focusHistoryDetailList = new ArrayList<>();
         recyclerView = findViewById(R.id.history_recycler_view);
 
+        profile_pic = findViewById(R.id.profile_image);
+        profile_pic.setImageResource(R.drawable.flowers);
+
+        userName = findViewById(R.id.profile_username);
+        userName.setText("User 1");
+
         // Set focus history adapter
         setAdapter();
     }
 
+
+    /**
+     * Set focus history page recycler adapter
+     */
     private void setAdapter() {
         Context context= MyApplication.getAppContext();
         List<String> resArr = FileUtil.readJson(context, "token");
@@ -57,8 +74,11 @@ public class HistoryActivity extends AppCompatActivity {
         Integer userId = loginInfo.getUserId();
         String token = loginInfo.getToken();
 
-        // Integer userId = 9;
-       // String token = "0788ad5e-c5b0-4a43-a744-547353d763b4";
+        /**
+         * Test purpose only
+        Integer userId = 9;
+        String token = "0788ad5e-c5b0-4a43-a744-547353d763b4";
+         **/
 
         // Get histiory list request
         Map<String, String> pathVariables = new HashMap<>();
@@ -77,6 +97,7 @@ public class HistoryActivity extends AppCompatActivity {
             String finalResponseBodyStr = responseBodyStr;
             FocusHistory focusHistory = gson.fromJson(finalResponseBodyStr, FocusHistory.class);
             for (FocusHistoryDetail detail : focusHistory.getFocusHistoryDetailList()) focusHistoryDetailList.add(detail);
+            // Start new thread to set up the adapter
                 runOnUiThread(() -> {
                 HistoryRecyclerAdapter adapter = new HistoryRecyclerAdapter(focusHistoryDetailList);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

@@ -1,5 +1,6 @@
 package edu.neu.absorb;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,14 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        // The followings are textview that used in history item list
         private TextView historyID;
         private TextView historyDescription;
         private TextView startTime;
         private TextView endTime;
         private TextView createTime;
         private TextView updateTime;
+        private View horizontalDivider;
 
         public MyViewHolder(final View view) {
             super(view);
@@ -33,8 +36,9 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
             historyDescription = view.findViewById(R.id.history_description);
             startTime = view.findViewById(R.id.history_start_time);
             endTime = view.findViewById(R.id.history_end_time);
-            createTime = view.findViewById(R.id.history_create_time);
-            updateTime = view.findViewById(R.id.history_update_time);
+            horizontalDivider = view.findViewById(R.id.history_horizontal_divider);
+          //  createTime = view.findViewById(R.id.history_create_time);
+         //   updateTime = view.findViewById(R.id.history_update_time);
         }
     }
 
@@ -47,15 +51,22 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
 
     }
 
+    /**
+     * Implement history list item content
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull HistoryRecyclerAdapter.MyViewHolder holder, int position) {
         holder.historyID.setText("History ID: " + (position + 1));
+        holder.historyID.setTextColor(Color.BLUE);
         holder.historyDescription.setText("Detail: " + (focusHistoryList.get(position).getDescription().equals("") ?
                 "NULL" : focusHistoryList.get(position).getDescription()));
         holder.startTime.setText("Start Time: " + focusHistoryList.get(position).getStartTime());
         holder.endTime.setText("End Time: " + focusHistoryList.get(position).getEndTime());
-        holder.createTime.setText("Create Time: " + focusHistoryList.get(position).getCreateTime());
-        holder.updateTime.setText("Update Time: " + focusHistoryList.get(position).getUpdateTime());
+      //  holder.horizontalDivider.setBackgroundColor(Color.BLACK);
+       // holder.createTime.setText("Create Time: " + focusHistoryList.get(position).getCreateTime());
+      //  holder.updateTime.setText("Update Time: " + focusHistoryList.get(position).getUpdateTime());
     }
 
     @Override

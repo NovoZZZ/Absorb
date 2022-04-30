@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:background="?android:attr/listDivider"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/history_update_time"
+        app:layout_constraintTop_toBottomOf="@+id/history_end_time"
         tools:visibility="visible" />
 
     <TextView
@@ -56,23 +56,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:id="@+id/history_create_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/history_end_time"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="10dp" />
 
-    <TextView
-        android:id="@+id/history_update_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/history_create_time"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

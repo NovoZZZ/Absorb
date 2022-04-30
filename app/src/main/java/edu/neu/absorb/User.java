@@ -17,6 +17,8 @@ public class User {
     private double totalHour;
     @SerializedName("focusCount")
     private int count;
+    @SerializedName("score")
+    private int score;
 
 
     public User(String userID, double hour, int count) {
@@ -71,5 +73,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
