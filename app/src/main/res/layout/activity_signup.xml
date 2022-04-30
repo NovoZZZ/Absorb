@@ -10,8 +10,8 @@
         android:id="@+id/tv_registerusername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="44dp"
         android:text="Username"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,5 +74,14 @@
         android:text="Submit"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_registersignup"
+        app:srcCompat="@drawable/seedling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

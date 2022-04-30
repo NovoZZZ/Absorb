@@ -27,9 +27,9 @@ public class WelcomePageActivity extends AppCompatActivity {
         firstimage.setImageResource(imageResource);
 
         startbutton=findViewById(R.id.btn_start);
-        startbutton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
+//        startbutton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
                 Log.d("abc", String.valueOf(FileUtil.readJson(context,"token").toString().length()));
                 if(FileUtil.readJson(context,"token").toString().length()>10){
                 Intent intent = new Intent(WelcomePageActivity.this, MenuActivity.class);
@@ -40,8 +40,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-        });
+//        });
 
 
     }
-}
