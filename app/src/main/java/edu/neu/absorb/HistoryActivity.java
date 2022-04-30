@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView tvScore;
     private de.hdodenhof.circleimageview.CircleImageView ivAvatar;
     private ImageButton ibChangeNickname;
+    private Button btnLogout;
+    private Button btnSecurity;
 
 
     @Override
@@ -63,8 +66,19 @@ public class HistoryActivity extends AppCompatActivity {
         tvFocusTaskCount = findViewById(R.id.tv_profile_focus_count);
         tvScore = findViewById(R.id.tv_profile_score);
         ibChangeNickname = findViewById(R.id.btn_profile_change_nickname);
-        // TODO: Change nickname and password
+        // TODO: Change nickname
 //        ibChangeNickname.setOnClickListener();
+
+        btnLogout = findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(view -> {
+            // TODO: logout
+        });
+
+        btnSecurity = findViewById(R.id.btn_profile_security);
+        btnSecurity.setOnClickListener(view -> {
+            // TODO: change password
+
+        });
 
         // init user info
         initUserInfo();
