@@ -21,26 +21,38 @@ public class WelcomePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
-        firstimage=findViewById(R.id.iv_welcomepage);
+        firstimage = findViewById(R.id.iv_welcomepage);
 
-        int imageResource= getResources().getIdentifier("@drawable/seedling",null,this.getPackageName());
+        int imageResource = getResources().getIdentifier("@drawable/seedling", null, this.getPackageName());
         firstimage.setImageResource(imageResource);
 
-        startbutton=findViewById(R.id.btn_start);
+        startbutton = findViewById(R.id.btn_start);
 //        startbutton.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View view){
-                Log.d("abc", String.valueOf(FileUtil.readJson(context,"token").toString().length()));
-                if(FileUtil.readJson(context,"token").toString().length()>10){
-                Intent intent = new Intent(WelcomePageActivity.this, MenuActivity.class);
-                startActivity(intent);}
+        Log.d("abc", String.valueOf(FileUtil.readJson(context, "token").toString().length()));
+        if (FileUtil.readJson(context, "token").toString().length() > 10) {
+            Intent intent = new Intent(WelcomePageActivity.this, MenuActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(WelcomePageActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
 
-                else{
+//        });
+        startbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("abc", String.valueOf(FileUtil.readJson(context, "token").toString().length()));
+                if (FileUtil.readJson(context, "token").toString().length() > 10) {
+                    Intent intent = new Intent(WelcomePageActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                } else {
                     Intent intent = new Intent(WelcomePageActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             }
-//        });
+        });
 
-
+    }
     }
