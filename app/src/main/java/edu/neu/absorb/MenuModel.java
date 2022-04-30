@@ -1,13 +1,13 @@
 package edu.neu.absorb;
 
 public class MenuModel {
-    String title, description, date;
+    String title, description;
     int image;
 
-    public MenuModel(String title, String description, String date, int image) {
+    public MenuModel(String title, String description, int image) {
         this.title = title;
         this.description = description;
-        this.date = date;
+        //this.date = date;
         this.image = image;
     }
 
@@ -27,13 +27,13 @@ public class MenuModel {
         this.description = description;
     }
 
-    public String getDate() {
+    /*public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
-    }
+    }*/
 
     public int getImage() {
         return image;

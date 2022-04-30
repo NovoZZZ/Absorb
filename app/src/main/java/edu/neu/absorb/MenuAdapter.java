@@ -44,26 +44,26 @@ public class MenuAdapter extends PagerAdapter {
         ImageView bannerIv = view.findViewById(R.id.bannerIv);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
-        TextView dateTv = view.findViewById(R.id.dateTv);
+        //TextView dateTv = view.findViewById(R.id.dateTv);
 
         //get data
         MenuModel model = modelArrayList.get(position);
         String title = model.getTitle();
         String description = model.getDescription();
-        String date = model.getDate();
+        //String date = model.getDate();
         int image = model.getImage();
 
         //set data
         bannerIv.setImageResource(image);
         titleTv.setText(title);
         descriptionTv.setText(description);
-        dateTv.setText(date);
+        //dateTv.setText(date);
 
         //handle card click
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, title + "\n" + description + "\n"+ date, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, title + "\n" + description + "\n", Toast.LENGTH_SHORT).show();
             }
         });
 

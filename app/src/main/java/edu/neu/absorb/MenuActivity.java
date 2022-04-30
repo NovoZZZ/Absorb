@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,11 +15,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import edu.neu.absorb.utils.ApiUtil;
 import edu.neu.absorb.utils.FileUtil;
 import edu.neu.absorb.utils.MyApplication;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -30,16 +39,21 @@ public class MenuActivity extends AppCompatActivity {
     //UI Views
     private ViewPager viewPager;
 
-    // profile/ leaderboard page
+    // leaderboard page
     private Button btn_leaderBoard;
+
+    // profile page
+    private Button btn_profile;
+
     // focus page
     private Button btn_startFocus;
 
     private ArrayList<MenuModel> modelArrayList;
     private MenuAdapter myAdapter;
 
-    //set userid to textview
-    private TextView tv_nickname;
+    //set nickname, score to textview
+    TextView tv_nickname;
+    TextView tv_menu_score;
 
     private EditText etFocusTask;
 
@@ -57,9 +71,11 @@ public class MenuActivity extends AppCompatActivity {
 
         etFocusTask = findViewById(R.id.ed_description);
 
-        //set nickname to et
-        TextView tv_nickname = findViewById(R.id.tv_nickname);
-        setNickName();
+        //set nickname,score to tv
+        tv_nickname = findViewById(R.id.tv_nickname);
+        tv_menu_score = findViewById(R.id.tv_menu_score);
+        setNickName();//set nickname and score
+
 
         // init leaderboard page
         btn_leaderBoard = findViewById(R.id.btn_leaderboard);
@@ -79,6 +95,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        btn_profile = findViewById(R.id.btn_profile);
+        btn_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openProfile();
+            }
+        });
         //set view pager change listener
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -108,13 +131,63 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openProfile() {
+        startActivity(new Intent(this, HistoryActivity.class));
+    }
     private void setNickName() {
 
-        //Todo: how to get username? 4/28
-        //get username
-        //String userName =
-        //set username to tv
-        //tv_nickname.setText(userName);
+        //get id and token from local cache
+        Context context= MyApplication.getAppContext();
+        List<String> resArr = FileUtil.readJson(context, "token");
+        String strRes = resArr.size() != 0 ? resArr.get(0) : "";
+
+        // Deserialize json
+        Gson gson = new Gson();
+        LoginInfo loginInfo = gson.fromJson(strRes, LoginInfo.class);
+
+        Integer userId = loginInfo.getUserId(); //== null ? 1:loginInfo.getUserId();
+        String token = loginInfo.getToken(); //== null ? "c8af4c6c-a512-418f-ad93-ae17e3ac668d" : loginInfo.getToken();
+
+        //use api call to get user info
+        Map<String, String> pathVariables = new HashMap<>();
+        pathVariables.put("id", String.valueOf(userId));
+        pathVariables.put("token", token);
+        // build request
+        Request request = ApiUtil.buildRequest(ApiUtil.USER_INFO_API, pathVariables, null);
+
+        // call api
+        new Thread(() -> {
+            //String responseBodyStr = "no user";
+            JSONObject jsonResponse = null;
+            try (Response response = ApiUtil.client.newCall(request).execute()) {
+                //responseBodyStr = response.body().string();
+
+                //JSONObject jsonObject = JSONUtil.parseObj(responseBodyStr);
+                jsonResponse = JSONUtil.parseObj(response.body().string());
+                Log.d("Test activity", jsonResponse.toString());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            JSONObject data = jsonResponse.getJSONObject("data");
+            String nickname = (String) data.get("nickname") == null ? "nullname": (String)data.get("nickname");
+            int score = (Integer) data.getInt("score") ==null ? 0: (Integer) data.get("score");
+            Log.d("Test activity",nickname);
+            Log.d("Test activity",String.valueOf(score));
+
+            //runOnUiThread(() -> {
+              //  this.tv_nickname.setText(nickname);
+            //});
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tv_nickname.setText(nickname);
+                    tv_menu_score.setText("Score: " + score);
+                }
+            });
+
+        }).start();
 
     }
 
@@ -129,19 +202,24 @@ public class MenuActivity extends AppCompatActivity {
 
         //add items to list
         modelArrayList.add(new MenuModel(
-                "Cordyline",
-                "Description 02",
-                "04/21/2022",
+                "Tutorial",
+                "Swipe to find it out...",
                 R.drawable.cordyline));
         modelArrayList.add(new MenuModel(
-                "Comic Tree",
-                "Description 02",
-                "04/21/2022",
-                R.drawable.comic_trees));
+                "Plant a Tree",
+                "Whenever you want to absorb, plant trees.",
+                R.drawable.sapling2_menu));
         modelArrayList.add(new MenuModel(
-                "Flowers",
-                "Description 02",
-                "04/21/2022",
+                "Stay Focused",
+                "Leave your phone upside down, tree will grow faster.",
+                R.drawable.leave_menu));
+        modelArrayList.add(new MenuModel(
+                "Unlock more Styles",
+                "Unlock more trees as focus score grows.",
+                R.drawable.pinetree_bubbletree_menu));
+        modelArrayList.add(new MenuModel(
+                "Now let's get started",
+                "Press Start Button to Absorb...",
                 R.drawable.flowers));
 
         //setup adapter
