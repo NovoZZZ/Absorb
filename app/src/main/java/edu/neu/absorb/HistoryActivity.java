@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -103,7 +105,16 @@ public class HistoryActivity extends AppCompatActivity {
 
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(view -> {
-            // TODO: logout
+            // log out
+            FileUtil.deleteJson(this,"token");
+
+            // restart app
+            PackageManager packageManager = this.getPackageManager();
+            Intent intent = packageManager.getLaunchIntentForPackage(this.getPackageName());
+            ComponentName componentName = intent.getComponent();
+            Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+            this.startActivity(mainIntent);
+            Runtime.getRuntime().exit(0);
         });
 
         btnSecurity = findViewById(R.id.btn_profile_security);
