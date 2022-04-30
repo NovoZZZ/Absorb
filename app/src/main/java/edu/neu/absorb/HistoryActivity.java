@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -107,7 +108,9 @@ public class HistoryActivity extends AppCompatActivity {
 
         btnSecurity = findViewById(R.id.btn_profile_security);
         btnSecurity.setOnClickListener(view -> {
-            // TODO: change password
+            // change password
+            Intent intent = new Intent(this, ChangePasswordActivity.class);
+            startActivity(intent);
 
         });
 
