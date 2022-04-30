@@ -51,7 +51,8 @@
             android:exported="false" />
         <activity
             android:name=".FocusActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MenuActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="false"></activity>

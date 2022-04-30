@@ -4,26 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#51A387"
+    android:background="@color/green"
     tools:context=".FocusActivity">
 
     <ImageView
         android:id="@+id/iv_tree_pic"
-        android:layout_width="217dp"
-        android:layout_height="234dp"
+        android:layout_width="240dp"
+        android:layout_height="223dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.361"
-        app:srcCompat="@drawable/comic_trees" />
+        app:srcCompat="@drawable/bubbletree_nobg" />
 
     <EditText
         android:id="@+id/et_focus_description"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:inputType="textPersonName"
@@ -33,17 +34,51 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
+        android:id="@+id/tv_light_strength_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Grow Speed:"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_grow_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginBottom="20dp"
+        android:text="normal"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
+        app:layout_constraintStart_toEndOf="@+id/tv_light_strength_label"
+        app:layout_constraintStart_toStartOf="@+id/tv_light_strength_label" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="29dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
+        app:layout_constraintEnd_toStartOf="@+id/tv_light_strength_label"
+        app:srcCompat="@drawable/waterdrop" />
+
+    <TextView
         android:id="@+id/tv_task_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:text="Task:"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_light_strength_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintHorizontal_bias="0.209"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -70,39 +105,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_focus_time" />
-
-    <TextView
-        android:id="@+id/tv_light_strength_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="Grow Speed:"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="29dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
-        app:layout_constraintEnd_toStartOf="@+id/tv_light_strength_label"
-        app:srcCompat="@drawable/waterdrop" />
-
-    <TextView
-        android:id="@+id/tv_grow_speed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginBottom="28dp"
-        android:text="normal"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/iv_tree_pic"
-        app:layout_constraintStart_toEndOf="@+id/tv_light_strength_label"
-        app:layout_constraintStart_toStartOf="@+id/tv_light_strength_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
