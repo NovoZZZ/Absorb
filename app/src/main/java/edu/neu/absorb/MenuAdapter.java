@@ -50,7 +50,7 @@ public class MenuAdapter extends PagerAdapter {
         MenuModel model = modelArrayList.get(position);
         String title = model.getTitle();
         String description = model.getDescription();
-        String date = model.getDate();
+        //String date = model.getDate();
         int image = model.getImage();
 
         //set data
@@ -63,7 +63,7 @@ public class MenuAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, title + "\n" + description + "\n"+ date, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, title + "\n" + description + "\n", Toast.LENGTH_SHORT).show();
             }
         });
 

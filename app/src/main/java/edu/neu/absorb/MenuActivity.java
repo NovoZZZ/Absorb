@@ -51,8 +51,9 @@ public class MenuActivity extends AppCompatActivity {
     private ArrayList<MenuModel> modelArrayList;
     private MenuAdapter myAdapter;
 
-    //set nickname to textview
+    //set nickname, score to textview
     TextView tv_nickname;
+    TextView tv_menu_score;
 
     private EditText etFocusTask;
 
@@ -70,9 +71,10 @@ public class MenuActivity extends AppCompatActivity {
 
         etFocusTask = findViewById(R.id.ed_description);
 
-        //set nickname to tv
+        //set nickname,score to tv
         tv_nickname = findViewById(R.id.tv_nickname);
-        setNickName();
+        tv_menu_score = findViewById(R.id.tv_menu_score);
+        setNickName();//set nickname and score
 
 
         // init leaderboard page
@@ -134,7 +136,6 @@ public class MenuActivity extends AppCompatActivity {
     }
     private void setNickName() {
 
-        //Todo: how to get username? 4/28
         //get id and token from local cache
         Context context= MyApplication.getAppContext();
         List<String> resArr = FileUtil.readJson(context, "token");
@@ -171,7 +172,9 @@ public class MenuActivity extends AppCompatActivity {
 
             JSONObject data = jsonResponse.getJSONObject("data");
             String nickname = (String) data.get("nickname") == null ? "nullname": (String)data.get("nickname");
+            int score = (Integer) data.getInt("score") ==null ? 0: (Integer) data.get("score");
             Log.d("Test activity",nickname);
+            Log.d("Test activity",String.valueOf(score));
 
             //runOnUiThread(() -> {
               //  this.tv_nickname.setText(nickname);
@@ -180,6 +183,7 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     tv_nickname.setText(nickname);
+                    tv_menu_score.setText("Score: " + score);
                 }
             });
 
@@ -200,23 +204,23 @@ public class MenuActivity extends AppCompatActivity {
         modelArrayList.add(new MenuModel(
                 "Tutorial",
                 "Swipe to find it out...",
-                "",
                 R.drawable.cordyline));
         modelArrayList.add(new MenuModel(
                 "Plant a Tree",
                 "Whenever you want to absorb, plant trees.",
-                "04/21/2022",
                 R.drawable.sapling2_menu));
         modelArrayList.add(new MenuModel(
                 "Stay Focused",
-                "In the following time, the tree will grow while you work. Trees will grow faster when you stay away from your cellphone.",
-                "04/21/2022",
+                "Leave your phone upside down, tree will grow faster.",
                 R.drawable.leave_menu));
         modelArrayList.add(new MenuModel(
                 "Unlock more Styles",
                 "Unlock more trees as focus score grows.",
-                "04/21/2022",
                 R.drawable.pinetree_bubbletree_menu));
+        modelArrayList.add(new MenuModel(
+                "Now let's get started",
+                "Press Start Button to Absorb...",
+                R.drawable.flowers));
 
         //setup adapter
         myAdapter = new MenuAdapter(this, modelArrayList);
