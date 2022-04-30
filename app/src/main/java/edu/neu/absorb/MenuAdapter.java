@@ -44,7 +44,7 @@ public class MenuAdapter extends PagerAdapter {
         ImageView bannerIv = view.findViewById(R.id.bannerIv);
         TextView titleTv = view.findViewById(R.id.titleTv);
         TextView descriptionTv = view.findViewById(R.id.descriptionTv);
-        TextView dateTv = view.findViewById(R.id.dateTv);
+        //TextView dateTv = view.findViewById(R.id.dateTv);
 
         //get data
         MenuModel model = modelArrayList.get(position);
@@ -57,7 +57,7 @@ public class MenuAdapter extends PagerAdapter {
         bannerIv.setImageResource(image);
         titleTv.setText(title);
         descriptionTv.setText(description);
-        dateTv.setText(date);
+        //dateTv.setText(date);
 
         //handle card click
         view.setOnClickListener(new View.OnClickListener() {
