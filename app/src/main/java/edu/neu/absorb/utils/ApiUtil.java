@@ -15,7 +15,8 @@ public enum ApiUtil {
     ADD_FOCUS_RECORD_API(ApiUtil.SERVER_ADDRESS + "/focus/add", "POST"),
     GET_HISTORY_LIST_API(ApiUtil.SERVER_ADDRESS + "/focus/list", "GET"),
     REGISTER_API(ApiUtil.SERVER_ADDRESS + "/user/create", "POST"),
-    CHANGE_PASSWORD_API(ApiUtil.SERVER_ADDRESS + "/user/change_password", "POST");
+    CHANGE_PASSWORD_API(ApiUtil.SERVER_ADDRESS + "/user/change_password", "POST"),
+    CHANGE_NICKNAME_API(ApiUtil.SERVER_ADDRESS + "/user/change_nickname", "POST");
 
 
     private String url;

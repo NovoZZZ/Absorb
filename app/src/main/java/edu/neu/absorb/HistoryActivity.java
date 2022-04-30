@@ -1,14 +1,18 @@
 package edu.neu.absorb;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,8 +70,35 @@ public class HistoryActivity extends AppCompatActivity {
         tvFocusTaskCount = findViewById(R.id.tv_profile_focus_count);
         tvScore = findViewById(R.id.tv_profile_score);
         ibChangeNickname = findViewById(R.id.btn_profile_change_nickname);
-        // TODO: Change nickname
-//        ibChangeNickname.setOnClickListener();
+        // Change nickname
+        ibChangeNickname.setOnClickListener(view -> {
+            // build dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Nickname");
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String newNickname = input.getText().toString();
+                    // change nickname
+                    changeNickname(newNickname);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        });
 
         btnLogout = findViewById(R.id.btn_logout);
         btnLogout.setOnClickListener(view -> {
@@ -183,5 +214,39 @@ public class HistoryActivity extends AppCompatActivity {
             });
         }).start();
 
+    }
+
+    private void changeNickname(String nickname) {
+        // get login info
+        LoginInfo loginInfo = FileUtil.getLoginInfo();
+        if (loginInfo == null) {
+            throw new RuntimeException("NO USER LOGIN");
+        }
+        // request body
+        Map<String, Object> requestBody = new HashMap<>();
+        // user id
+        requestBody.put("userId", loginInfo.getUserId());
+        // token
+        requestBody.put("token", loginInfo.getToken());
+        // nickname
+        requestBody.put("nickname", nickname);
+        // build request
+        Request request = ApiUtil.buildRequest(ApiUtil.CHANGE_NICKNAME_API, null, requestBody);
+
+        // call api
+        new Thread(() -> {
+            String responseBodyStr = null;
+            try (Response response = ApiUtil.client.newCall(request).execute()) {
+                responseBodyStr = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // parse response to Object
+            JSONObject jsonObject = JSONUtil.parseObj(responseBodyStr);
+            Log.d("Focus activity", jsonObject.toString());
+            // refresh user info
+            initUserInfo();
+        }).start();
     }
 }
