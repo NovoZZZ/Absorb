@@ -30,6 +30,25 @@
         app:layout_constraintStart_toEndOf="@+id/tv_hello"
         app:layout_constraintTop_toTopOf="@+id/tv_hello" />
 
+    <ImageView
+        android:id="@+id/iv_menu_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/tv_hello"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <TextView
+        android:id="@+id/tv_menu_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 1000"
+        app:layout_constraintStart_toEndOf="@+id/iv_menu_star"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
+
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
@@ -45,25 +64,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.40"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_leaderboard"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        android:layout_marginEnd="4dp"/>
 
     <Button
         android:id="@+id/btn_leaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="leaderboard"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/btn_startFocus"
@@ -74,13 +86,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <EditText
         android:id="@+id/ed_description"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="What are you looking to focus today?"
         android:inputType="textPersonName"
@@ -110,7 +122,7 @@
             android:layout_centerInParent="true"
             android:clipToPadding="false"
             android:foregroundGravity="center"
-            android:overScrollMode="never"/>
+            android:overScrollMode="never" />
 
     </RelativeLayout>
 
