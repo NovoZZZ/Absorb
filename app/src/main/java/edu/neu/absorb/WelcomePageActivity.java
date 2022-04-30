@@ -15,7 +15,7 @@ import edu.neu.absorb.utils.MyApplication;
 
 public class WelcomePageActivity extends AppCompatActivity {
     private Context context= MyApplication.getAppContext();
-    Button startbutton;
+    Button startbutton,loginout;
     ImageView firstimage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,15 @@ public class WelcomePageActivity extends AppCompatActivity {
                 }
             }
         });
+
+        loginout=findViewById(R.id.btn_logout);
+        loginout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FileUtil.deleteJson(context,"token");
+            }
+        });
+
 
     }
     }
