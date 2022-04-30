@@ -31,10 +31,72 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"
             android:text="Nickname"
+            android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/iv_profile_avatar"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.204" />
+            app:layout_constraintVertical_bias="0.094" />
+
+        <TextView
+            android:id="@+id/tv_profile_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="Since Apr, 24 2022"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/iv_profile_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_nickname" />
+
+        <TextView
+            android:id="@+id/tv_profile_total_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="12dp"
+            android:text="Total Focus Hours: 24 hours"
+            app:layout_constraintStart_toStartOf="@+id/iv_profile_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_create_time" />
+
+        <TextView
+            android:id="@+id/tv_profile_focus_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            android:text="24 tasks"
+            app:layout_constraintStart_toStartOf="@+id/iv_profile_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_total_hours" />
+
+        <ImageButton
+            android:id="@+id/btn_profile_change_nickname"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_profile_create_time"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_nickname"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_profile_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Score: 3500"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_total_hours" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_focus_count"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_total_hours"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

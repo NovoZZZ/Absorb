@@ -7,16 +7,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import edu.neu.absorb.utils.ApiUtil;
 import edu.neu.absorb.utils.FileUtil;
 import edu.neu.absorb.utils.MyApplication;
@@ -29,10 +37,14 @@ public class HistoryActivity extends AppCompatActivity {
     public static List<FocusHistoryDetail> focusHistoryDetailList;
     // Focus history page recycler view
     private RecyclerView recyclerView;
+    private TextView tvNickname;
+    private TextView tvCreateTime;
+    private TextView tvFocusHours;
+    private TextView tvFocusTaskCount;
+    private TextView tvScore;
+    private de.hdodenhof.circleimageview.CircleImageView ivAvatar;
+    private ImageButton ibChangeNickname;
 
-    private TextView userName;
-
-    private de.hdodenhof.circleimageview.CircleImageView profile_pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +55,19 @@ public class HistoryActivity extends AppCompatActivity {
         focusHistoryDetailList = new ArrayList<>();
         recyclerView = findViewById(R.id.rv_profile_history);
 
-        profile_pic = findViewById(R.id.iv_profile_avatar);
-        profile_pic.setImageResource(R.drawable.flowers);
+        ivAvatar = findViewById(R.id.iv_profile_avatar);
 
-        userName = findViewById(R.id.tv_profile_nickname);
-        userName.setText("User 1");
+        tvNickname = findViewById(R.id.tv_profile_nickname);
+        tvCreateTime = findViewById(R.id.tv_profile_create_time);
+        tvFocusHours = findViewById(R.id.tv_profile_total_hours);
+        tvFocusTaskCount = findViewById(R.id.tv_profile_focus_count);
+        tvScore = findViewById(R.id.tv_profile_score);
+        ibChangeNickname = findViewById(R.id.btn_profile_change_nickname);
+        // TODO: Change nickname and password
+//        ibChangeNickname.setOnClickListener();
+
+        // init user info
+        initUserInfo();
 
         // Set focus history adapter
         setAdapter();
@@ -103,5 +123,51 @@ public class HistoryActivity extends AppCompatActivity {
             });
 
         }).start();
+    }
+
+    private void initUserInfo() {
+        // get login info
+        LoginInfo loginInfo = FileUtil.getLoginInfo();
+        // get user info
+        if (loginInfo == null) {
+            throw new RuntimeException("NO USER LOGIN");
+        }
+
+        // path variables
+        Map<String, String> pathVariables = new HashMap<>();
+        pathVariables.put("id", Integer.toString(loginInfo.getUserId()));
+        pathVariables.put("token", loginInfo.getToken());
+        // build request
+        Request request = ApiUtil.buildRequest(ApiUtil.USER_INFO_API, pathVariables, null);
+        // call api
+        new Thread(() -> {
+            String responseBodyStr = null;
+            try (Response response = ApiUtil.client.newCall(request).execute()) {
+                responseBodyStr = response.body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // parse response
+            JSONObject jsonResponse = JSONUtil.parseObj(responseBodyStr);
+            JSONObject data = jsonResponse.getJSONObject("data");
+            if (data == null) {
+                throw new RuntimeException("ERROR -- unable to get user info");
+            }
+            runOnUiThread(() -> {
+                // nickname
+                tvNickname.setText(data.getStr("nickname"));
+                // create time
+                Date createTime = data.getDate("createTime");
+                DateFormat dateInstance = SimpleDateFormat.getDateInstance();
+                tvCreateTime.setText("Since: " + dateInstance.format(createTime));
+                // focus hours
+                tvFocusHours.setText("Total Focus Hours: " + data.getInt("totalHours"));
+                // focus count
+                tvFocusTaskCount.setText(data.getInt("focusCount") + " Tasks");
+                // score
+                tvScore.setText("Score: " + data.getInt("score"));
+            });
+        }).start();
+
     }
 }
