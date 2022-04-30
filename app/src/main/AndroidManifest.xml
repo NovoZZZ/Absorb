@@ -14,6 +14,21 @@
         android:theme="@style/Theme.Absorb"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomePageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
             android:name=".HistoryListItemActivity"
             android:exported="false" />
         <activity
@@ -37,16 +52,10 @@
         <activity
             android:name=".FocusActivity"
             android:exported="false"
-            android:parentActivityName=".MenuActivity" />
+            android:parentActivityName=".MenuActivity"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>
