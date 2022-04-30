@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     // FIXME: 4/24/22 Test purpose only
     Button leaderboard;
+    Button btnlogin;
 
 
     @Override
@@ -42,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_test_focus).setOnClickListener(view -> {
             startActivity(new Intent(this, FocusActivity.class));
+        });
+
+        btnlogin=findViewById(R.id.btn_log);
+        btnlogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
 
     }
