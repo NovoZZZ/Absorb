@@ -14,6 +14,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -91,6 +92,7 @@ public class FileUtil {
 
         CacheRoot = Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED ? c
                 .getExternalCacheDir() : c.getCacheDir();
+        Log.d("c",CacheRoot.toString());
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         List<String> result = new ArrayList<String>();
@@ -133,6 +135,16 @@ public class FileUtil {
         }
 
         return result;
+    }
+
+
+    public static boolean deleteJson(Context c, String fileName){
+        CacheRoot = Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED ? c
+                .getExternalCacheDir() : c.getCacheDir();
+        CacheRoot.delete();
+        File des = new File(CacheRoot, fileName);
+        des.delete();
+        return true;
     }
 
     /**
