@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("read json",FileUtil.readJson(context,"token").toString());
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
+                        finish();
                     }
 
 
