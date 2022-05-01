@@ -1,5 +1,7 @@
 package edu.neu.absorb.utils;
 
+import java.sql.Date;
+
 public class TimeUtil {
     /**
      * convert counted seconds to time format, which is mm:ss
@@ -52,5 +54,9 @@ public class TimeUtil {
         }
         result.append(seconds).append("S");
         return result.toString();
+    }
+
+    public static Integer getIntervalMinutes(Date start, Date end) {
+        return (int) ((end.getTime() - start.getTime())) / (1000 * 6);
     }
 }
