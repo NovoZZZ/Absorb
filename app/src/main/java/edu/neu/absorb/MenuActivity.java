@@ -59,8 +59,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private EditText etFocusTask;
 
-    public String menu_score;
-    public String tasks;
+    //public String menu_score;
+    //public String tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,11 +178,11 @@ public class MenuActivity extends AppCompatActivity {
             JSONObject data = jsonResponse.getJSONObject("data");
             String nickname = (String) data.get("nickname") == null ? "nullname": (String)data.get("nickname");
             int score = (Integer) data.get("score") ==null ? 0: (Integer) data.get("score");
-            int focuscounts= (Integer) data.get("score") ==null ? 0: (Integer) data.get("focusCount");
-            menu_score = String.valueOf(score);
-            tasks = String.valueOf(focuscounts);
-            MENU_SCORE = String.valueOf(score);
-            MENU_TASKS = String.valueOf(focuscounts);
+            //int focuscounts= (Integer) data.get("score") ==null ? 0: (Integer) data.get("focusCount");
+            //menu_score = String.valueOf(score);
+            //tasks = String.valueOf(focuscounts);
+            //MENU_SCORE = String.valueOf(score);
+            //MENU_TASKS = String.valueOf(focuscounts);
 
 
             Log.d("Test activity",nickname);
