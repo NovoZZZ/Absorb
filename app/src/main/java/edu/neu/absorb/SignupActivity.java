@@ -47,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
                         //redirect
                         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }
         );

@@ -34,9 +34,11 @@ public class WelcomePageActivity extends AppCompatActivity {
         if (FileUtil.readJson(context, "token").toString().length() > 10) {
             Intent intent = new Intent(WelcomePageActivity.this, MenuActivity.class);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(WelcomePageActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
 
 //        });
@@ -50,6 +52,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(WelcomePageActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
