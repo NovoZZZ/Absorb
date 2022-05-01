@@ -57,6 +57,9 @@ public class MenuActivity extends AppCompatActivity {
 
     private EditText etFocusTask;
 
+    public String menu_score;
+    public String tasks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,7 +175,12 @@ public class MenuActivity extends AppCompatActivity {
 
             JSONObject data = jsonResponse.getJSONObject("data");
             String nickname = (String) data.get("nickname") == null ? "nullname": (String)data.get("nickname");
-            int score = (Integer) data.getInt("score") ==null ? 0: (Integer) data.get("score");
+            int score = (Integer) data.get("score") ==null ? 0: (Integer) data.get("score");
+            int focuscounts= (Integer) data.get("score") ==null ? 0: (Integer) data.get("focusCount");
+            menu_score = String.valueOf(score);
+            tasks = String.valueOf(focuscounts);
+
+
             Log.d("Test activity",nickname);
             Log.d("Test activity",String.valueOf(score));
 
@@ -224,7 +232,7 @@ public class MenuActivity extends AppCompatActivity {
                 R.drawable.alltrees_menu));
         modelArrayList.add(new MenuModel(
                 "Now let's get started",
-                "Press Start Button to Absorb...",
+                "You have completed " + tasks + " tasks, and have scored " + menu_score+"."+ "Press Start Button to Absorb...",
                 R.drawable.comic_trees));
 
         //setup adapter
