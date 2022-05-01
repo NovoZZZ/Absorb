@@ -213,6 +213,7 @@ public class MenuActivity extends AppCompatActivity {
                 "Be Absorbed",
                 "The tree will grow while you work.",
                 R.drawable.beabsorbed_menu));
+
         modelArrayList.add(new MenuModel(
                 "Place your phone upside down",
                 "Leave your phone upside down, tree will grow faster.",

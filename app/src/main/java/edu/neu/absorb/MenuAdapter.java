@@ -68,7 +68,7 @@ public class MenuAdapter extends PagerAdapter {
         });
 
         //add view to container
-        container.addView(view,position);
+        container.addView(view);
 
         return view;
     }
