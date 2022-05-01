@@ -203,24 +203,28 @@ public class MenuActivity extends AppCompatActivity {
         //add items to list
         modelArrayList.add(new MenuModel(
                 "Tutorial",
-                "Swipe to find it out...",
+                "Swipe to find out...",
                 R.drawable.cordyline));
         modelArrayList.add(new MenuModel(
                 "Plant a Tree",
                 "Whenever you want to absorb, plant trees.",
-                R.drawable.sapling2_menu));
+                R.drawable.plantatree_menu));
         modelArrayList.add(new MenuModel(
-                "Stay Focused",
+                "Be Absorbed",
+                "The tree will grow while you work.",
+                R.drawable.beabsorbed_menu));
+        modelArrayList.add(new MenuModel(
+                "Place your phone upside down",
                 "Leave your phone upside down, tree will grow faster.",
-                R.drawable.leave_menu));
+                R.drawable.upsidedown_menu));
         modelArrayList.add(new MenuModel(
                 "Unlock more Styles",
                 "Unlock more trees as focus score grows.",
-                R.drawable.pinetree_bubbletree_menu));
+                R.drawable.alltrees_menu));
         modelArrayList.add(new MenuModel(
                 "Now let's get started",
                 "Press Start Button to Absorb...",
-                R.drawable.flowers));
+                R.drawable.comic_trees));
 
         //setup adapter
         myAdapter = new MenuAdapter(this, modelArrayList);
