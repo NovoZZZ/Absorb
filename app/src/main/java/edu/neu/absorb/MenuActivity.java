@@ -32,6 +32,8 @@ import okhttp3.Response;
 public class MenuActivity extends AppCompatActivity {
 
     public static final String EXTRA_DESCRIPTION = "edu.neu.absorb.EXTRA_DESCRIPTION";
+    public static String MENU_SCORE = "";
+    public static String MENU_TASKS = "";
 
     //actionbar
     private ActionBar actionBar;
@@ -179,6 +181,8 @@ public class MenuActivity extends AppCompatActivity {
             int focuscounts= (Integer) data.get("score") ==null ? 0: (Integer) data.get("focusCount");
             menu_score = String.valueOf(score);
             tasks = String.valueOf(focuscounts);
+            MENU_SCORE = String.valueOf(score);
+            MENU_TASKS = String.valueOf(focuscounts);
 
 
             Log.d("Test activity",nickname);
@@ -232,7 +236,7 @@ public class MenuActivity extends AppCompatActivity {
                 R.drawable.alltrees_menu));
         modelArrayList.add(new MenuModel(
                 "Now let's get started",
-                "You have completed " + tasks + " tasks, and have scored " + menu_score+"."+ "Press Start Button to Absorb...",
+                "Press button to Start Focus...",
                 R.drawable.comic_trees));
 
         //setup adapter
