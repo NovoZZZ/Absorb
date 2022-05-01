@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import edu.neu.absorb.utils.TimeUtil;
 
 public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecyclerAdapter.MyViewHolder>{
     private List<FocusHistoryDetail> focusHistoryList;
@@ -67,18 +68,23 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
         holder.historyID.setTextColor(Color.BLUE);
         holder.historyDescription.setText("Detail: " + (focusHistoryList.get(position).getDescription().equals("") ?
                 "NULL" : focusHistoryList.get(position).getDescription()));
+
         String start = focusHistoryList.get(position).getStartTime();
         holder.startTime.setText("Start Time: " + start);
         String end = focusHistoryList.get(position).getEndTime();
         holder.endTime.setText("End Time: " + focusHistoryList.get(position).getEndTime());
+        int startYear = Integer.valueOf(start.substring(0, 4));
+        int startMouth = Integer.valueOf(start.substring(5, 7));
         int startDate = Integer.valueOf(start.substring(8, 10));
         int startHour = Integer.valueOf(start.substring(11, 13));
         int startMin = Integer.valueOf(start.substring(14, 16));
+        int endYear = Integer.valueOf(end.substring(0, 4));
+        int endMouth = Integer.valueOf(end.substring(5, 7));
         int endDate = Integer.valueOf(end.substring(8, 10));
         int endHour = Integer.valueOf(end.substring(11, 13));
         int endMin = Integer.valueOf(end.substring(14, 16));
-        long startSec = startDate * 24 * 60 * 60 + startHour * 60 * 60 + startMin * 60;
-        long endSec = endDate * 24 * 60 * 60 + endHour * 60 * 60 + endMin * 60;
+        long startSec = startMouth * 30 * 24 * 60 * 60 + startDate * 24 * 60 * 60 + startHour * 60 * 60 + startMin * 60;
+        long endSec = endMouth * 30 * 24 * 60 * 60 + endDate * 24 * 60 * 60 + endHour * 60 * 60 + endMin * 60;
         if (endSec - startSec >= 1200) {
             holder.historyAwardPic.setImageResource(R.drawable.bubbletree_nobg);
         } else if (endSec - startSec >= 600) {
@@ -86,6 +92,9 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
         } else {
             holder.historyAwardPic.setImageResource(R.drawable.leave_nobg);
         }
+        //      Time start = new Time(focusHistoryList.get(position).getStartTime());
+
+        //     holder.historyAwardPic.setImageResource(R.drawable.gold_medal);
   //      Time start = new Time(focusHistoryList.get(position).getStartTime());
         
    //     holder.historyAwardPic.setImageResource(R.drawable.gold_medal);

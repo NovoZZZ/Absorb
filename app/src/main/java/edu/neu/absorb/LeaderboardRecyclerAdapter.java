@@ -65,6 +65,13 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
         holder.userScore.setText("Score: " + String.valueOf(score));
         holder.userScore.setTextColor(Color.BLUE);
         holder.userRank.setText("Rank: " + String.valueOf(rank));
+
+        if (userList.get(position).getScore() >= 10) {
+            holder.userAvator.setImageResource(R.drawable.bubbletree_nobg);
+        } else if (userList.get(position).getScore() >= 5) {
+            holder.userAvator.setImageResource(R.drawable.pinetree_nobg);
+        } else holder.userAvator.setImageResource(R.drawable.leave_nobg);
+
         if (position == 0) holder.medal.setImageResource(R.drawable.gold_medal);
         else if (position == 1) holder.medal.setImageResource(R.drawable.silever_medal);
         else if (position == 2) holder.medal.setImageResource(R.drawable.bronze_medal);
