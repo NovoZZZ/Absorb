@@ -107,16 +107,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_profile_history"
-        android:layout_width="414dp"
-        android:layout_height="360dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/history_horizontal_divider"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.068" />
 
     <Button
         android:id="@+id/btn_logout"

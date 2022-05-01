@@ -1,6 +1,7 @@
 package edu.neu.absorb;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.Time;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import de.hdodenhof.circleimageview.CircleImageView;
 import edu.neu.absorb.utils.TimeUtil;
 
@@ -26,7 +31,6 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // The followings are textview that used in history item list
-        private TextView historyID;
         private TextView historyDescription;
         private TextView startTime;
         private TextView endTime;
@@ -37,7 +41,6 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
 
         public MyViewHolder(final View view) {
             super(view);
-            historyID = view.findViewById(R.id.history_id);
             historyDescription = view.findViewById(R.id.history_description);
             startTime = view.findViewById(R.id.history_start_time);
             endTime = view.findViewById(R.id.history_end_time);
@@ -64,30 +67,19 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<HistoryRecycler
      */
     @Override
     public void onBindViewHolder(@NonNull HistoryRecyclerAdapter.MyViewHolder holder, int position) {
-        holder.historyID.setText("History ID: " + (position + 1));
-        holder.historyID.setTextColor(Color.BLUE);
-        holder.historyDescription.setText("Detail: " + (focusHistoryList.get(position).getDescription().equals("") ?
-                "NULL" : focusHistoryList.get(position).getDescription()));
+        holder.historyDescription.setText("Focus Task: " + (focusHistoryList.get(position).getDescription().equals("") ?
+                "Normal Focus Task" : focusHistoryList.get(position).getDescription()));
 
-        String start = focusHistoryList.get(position).getStartTime();
-        holder.startTime.setText("Start Time: " + start);
-        String end = focusHistoryList.get(position).getEndTime();
-        holder.endTime.setText("End Time: " + focusHistoryList.get(position).getEndTime());
-        int startYear = Integer.valueOf(start.substring(0, 4));
-        int startMouth = Integer.valueOf(start.substring(5, 7));
-        int startDate = Integer.valueOf(start.substring(8, 10));
-        int startHour = Integer.valueOf(start.substring(11, 13));
-        int startMin = Integer.valueOf(start.substring(14, 16));
-        int endYear = Integer.valueOf(end.substring(0, 4));
-        int endMouth = Integer.valueOf(end.substring(5, 7));
-        int endDate = Integer.valueOf(end.substring(8, 10));
-        int endHour = Integer.valueOf(end.substring(11, 13));
-        int endMin = Integer.valueOf(end.substring(14, 16));
-        long startSec = startMouth * 30 * 24 * 60 * 60 + startDate * 24 * 60 * 60 + startHour * 60 * 60 + startMin * 60;
-        long endSec = endMouth * 30 * 24 * 60 * 60 + endDate * 24 * 60 * 60 + endHour * 60 * 60 + endMin * 60;
-        if (endSec - startSec >= 1200) {
+        DateTime start = DateUtil.parse(focusHistoryList.get(position).getStartTime());
+        holder.startTime.setText("Start Time: " + start.toStringDefaultTimeZone());
+        DateTime end = DateUtil.parse(focusHistoryList.get(position).getEndTime());
+        holder.endTime.setText("End Time: " + end.toStringDefaultTimeZone());
+
+        Integer intervalMinutes = TimeUtil.getIntervalMinutes(start, end);
+
+        if (intervalMinutes >= 10) {
             holder.historyAwardPic.setImageResource(R.drawable.bubbletree_nobg);
-        } else if (endSec - startSec >= 600) {
+        } else if (intervalMinutes >= 5) {
             holder.historyAwardPic.setImageResource(R.drawable.pinetree_nobg);
         } else {
             holder.historyAwardPic.setImageResource(R.drawable.leave_nobg);

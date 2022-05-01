@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_focus.xml" value="0.30228881835937504" />
         <entry key="app/src/main/res/layout/activity_focus_result.xml" value="0.24843597412109386" />
         <entry key="app/src/main/res/layout/activity_history.xml" value="0.2627105712890625" />
+        <entry key="app/src/main/res/layout/activity_leaderboard.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3046875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.5188298543294271" />
@@ -14,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.313232421875" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.31346740722656247" />
         <entry key="app/src/main/res/layout/activity_welcome_page.xml" value="0.1921875" />
+        <entry key="app/src/main/res/layout/history_list_item.xml" value="0.28355916341145837" />
       </map>
     </option>
   </component>

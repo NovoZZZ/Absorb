@@ -2,6 +2,8 @@ package edu.neu.absorb.utils;
 
 import java.sql.Date;
 
+import cn.hutool.core.date.DateTime;
+
 public class TimeUtil {
     /**
      * convert counted seconds to time format, which is mm:ss
@@ -56,7 +58,7 @@ public class TimeUtil {
         return result.toString();
     }
 
-    public static Integer getIntervalMinutes(Date start, Date end) {
-        return (int) ((end.getTime() - start.getTime())) / (1000 * 6);
+    public static Integer getIntervalMinutes(DateTime start, DateTime end) {
+        return (int) ((end.getTime() - start.getTime())) / (1000 * 60);
     }
 }

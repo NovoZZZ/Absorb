@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("Test activity", jsonObject.toString());
 
 
-                    if (jsonObject.get("message").toString().equals("Login failed")) {
+                    if (jsonObject.get("message").toString().equals("Login failed") || jsonObject.get("message").toString().equals("Wrong password")) {
                         runOnUiThread(() -> {
                             errview.setText("Please check your username and password again");
                             errview.setTextColor(Color.RED);
