@@ -1,5 +1,8 @@
 package edu.neu.absorb;
 
+import static edu.neu.absorb.MenuActivity.MENU_SCORE;
+import static edu.neu.absorb.MenuActivity.MENU_TASKS;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +65,7 @@ public class MenuAdapter extends PagerAdapter {
         //handle card click
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {//"You have completed " + MENU_TASKS +" tasks, and scored " + MENU_SCORE
                 Toast.makeText(context, title + "\n" + description + "\n", Toast.LENGTH_SHORT).show();
             }
         });

@@ -32,6 +32,8 @@ import okhttp3.Response;
 public class MenuActivity extends AppCompatActivity {
 
     public static final String EXTRA_DESCRIPTION = "edu.neu.absorb.EXTRA_DESCRIPTION";
+    public static String MENU_SCORE = "";
+    public static String MENU_TASKS = "";
 
     //actionbar
     private ActionBar actionBar;
@@ -56,6 +58,9 @@ public class MenuActivity extends AppCompatActivity {
     TextView tv_menu_score;
 
     private EditText etFocusTask;
+
+    //public String menu_score;
+    //public String tasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +177,14 @@ public class MenuActivity extends AppCompatActivity {
 
             JSONObject data = jsonResponse.getJSONObject("data");
             String nickname = (String) data.get("nickname") == null ? "nullname": (String)data.get("nickname");
-            int score = (Integer) data.getInt("score") ==null ? 0: (Integer) data.get("score");
+            int score = (Integer) data.get("score") ==null ? 0: (Integer) data.get("score");
+            //int focuscounts= (Integer) data.get("score") ==null ? 0: (Integer) data.get("focusCount");
+            //menu_score = String.valueOf(score);
+            //tasks = String.valueOf(focuscounts);
+            //MENU_SCORE = String.valueOf(score);
+            //MENU_TASKS = String.valueOf(focuscounts);
+
+
             Log.d("Test activity",nickname);
             Log.d("Test activity",String.valueOf(score));
 
@@ -224,7 +236,7 @@ public class MenuActivity extends AppCompatActivity {
                 R.drawable.alltrees_menu));
         modelArrayList.add(new MenuModel(
                 "Now let's get started",
-                "Press Start Button to Absorb...",
+                "Press button to Start Focus...",
                 R.drawable.comic_trees));
 
         //setup adapter
